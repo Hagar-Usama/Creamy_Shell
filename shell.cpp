@@ -1,19 +1,20 @@
+///////////////////////////////////////////////////////////////////////
+//////////////// Hagar Usama            ///////////////////////////////
+////////////////  4970                  /////////////////////////////// 
+////////////////  LAB 1 : Simple Shell  ///////////////////////////////
+////////////////  Date : 13/10          ///////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
 #include <iostream>
 #include <cstdlib>
+#include <signal.h>
 #include <fstream>
-#include <ctype.h>
-#include <regex>
-#include <cstdio>
-#include <cstdlib> // exit(), EXIT_SUCCESS, EXIT_FAILURE , system()
-#include <unistd.h> // fork() , execvp()
+#include <regex> 
+#include <unistd.h>
+#include <sys/wait.h>  
+#include <vector>
 
-#include <sys/wait.h> 
-#include <unistd.h> 
-#include <string>
-#include <iostream>
-#include <vector> // vector
-#include <ctype.h>
-//#include <regex.h>
+#define LIMIT 50
 
 using namespace std;
 
@@ -24,6 +25,17 @@ void rtrim(string &exp);
 string extract(string &exp , string re , string delim="");
 int get_matched(string s , regex reg , string &mat);
 
+void write_log(string filename , string str);
+void write_dic(string filename , string str);
+
+void handler(int signal){
+	
+	write_log("log.txt", "Child process was terminated\n");
+	//cout<<"Child process was terminated"<<endl;
+	
+	}	
+
+
 class Creamy_Shell{
 	
 	public:
@@ -31,38 +43,29 @@ class Creamy_Shell{
 	vector<string> args;
 	Creamy_Shell();
 	void run_shell();
+	
+	private:
 	void split_parameters();
 	void trim_command();
 	void get_arg_list(char* arr[]);
 	void call_fork(bool state);
 	
+	
 	};
 
 Creamy_Shell::Creamy_Shell(){
-	//args.push_back("ls");
-	//args.push_back("-l");
-	
+		write_dic("log.txt" ,"");
 	};
-	
+
+
 void Creamy_Shell::call_fork(bool state){
 	pid_t child;
-	
 	char *arg[args.size()+1];
 	get_arg_list(arg);
-	
-	//cout<<"printing args"<<endl;
-	
+		
 	
 	child =fork();
 	if (child == 0) {
-		//get into child process >> execute here
-		//printf("HC: hello from child\n");	
-		// call is generic for both commands with/without args
-		
-	/*
-		for(unsigned int i=0 ; i<args.size()+1 ; i++)
-		printf("*.* %s *.*\n", arg[i]);
-	*/
 		
 		execvp(arg[0] ,arg); 
 	} else if( child < 0){
@@ -74,25 +77,27 @@ void Creamy_Shell::call_fork(bool state){
 	{ 
 		 
 		//wait my child!! 
-		if(state) wait(NULL); 
-		printf("Mat el 3ayl!!\n"); 
+		if(state) for(int i=0 ; i< LIMIT ; i++)	wait(NULL);
+			
 	} 
 
 };	
 
+
 void Creamy_Shell::run_shell(){
 	
-	system("cd ..");
-	cout<<"$~: ";	
-	getline(cin,command);
-	//trim(command);	
+	signal(SIGCHLD , handler);
+	do{cout<<"$~: ";	
+	getline(cin,command);}while(!command.size());
+	
+		
 	split_parameters();
 	
 	if(!args[0].compare("exit"))
 		exit(0);
 		
 	else if(!args[0].compare("cd"))
-		system("cd ..");
+		chdir((char*)args[1].c_str()); /* error handling!! and mind the '/' */
 	else if(!args[args.size()-1].compare("&")){
 		//printf("background");
 		args.pop_back();
@@ -112,8 +117,7 @@ void Creamy_Shell::trim_command(){
 	}
 		
 void Creamy_Shell::split_parameters(){
-   //cout<<"split_paramenters"<<endl;
-   //cout<<"command : "<< command<<endl;
+   
    args.clear();
    //trim_command();
    char *token;
@@ -134,11 +138,9 @@ void Creamy_Shell::split_parameters(){
 void Creamy_Shell::get_arg_list(char* arr[]){
 	
 	unsigned int j=0;
-	for(j =0 ; j<args.size() ; j++){
-		//char* strcpy(char* dest, const char* src);
+	for(j =0 ; j<args.size() ; j++)
 		arr[j] =(char*)args[j].c_str();
 				
-		}
 	arr[j] = NULL;
 	
 	}
@@ -152,10 +154,8 @@ void Creamy_Shell::get_arg_list(char* arr[]){
 int main(){
 	
 	Creamy_Shell shell;
-	string buffer;
 	while(1){
-		shell.run_shell();
-		
+		shell.run_shell();	
 		}
 	
 	
@@ -211,3 +211,40 @@ void ltrim(string &exp){
 	exp = regex_replace(exp,reg,"");
 		 
 		 }
+
+void write_log(string filename , string str){
+
+	  FILE *fp;
+	
+		fp = fopen(filename.c_str(),"a");
+		if(fp == NULL) {
+		perror("Error");
+		exit(1);
+		}
+		else{
+			
+				fprintf (fp, "%s", str.c_str() );
+			}
+		
+  fclose(fp);
+
+	}
+
+
+void write_dic(string filename , string str){
+
+	  FILE *fp;
+	
+		fp = fopen(filename.c_str(),"w");
+		if(fp == NULL) {
+		perror("Error");
+		exit(1);
+		}
+		else{
+			
+				fprintf (fp, "%s", str.c_str() );
+			}
+		
+  fclose(fp);
+
+	}
