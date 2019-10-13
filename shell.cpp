@@ -28,99 +28,111 @@ class Creamy_Shell{
 	public:
 	string command;
 	vector<string> args;
+	Creamy_Shell();
 	void run_shell();
 	void split_parameters();
-	
+	void trim_command();
+	void get_arg_list(char* arr[]);
+	void call_fork();
 	
 	};
 
-void Creamy_Shell::run_shell(){
+Creamy_Shell::Creamy_Shell(){
+	//args.push_back("ls");
+	//args.push_back("-l");
 	
+	};
 	
+void Creamy_Shell::call_fork(){
 	
+	char *arg[args.size()+1];
+	get_arg_list(arg);
 	
-	}
-
-int main(){
-	
-	string buffer;
-	getline(cin,buffer);
-	
-	vector <string> args;
-	
-	//cout<<buffer;
- 
-    ltrim(buffer);
-    rtrim(buffer);
-    
-    //arguments are separated by just one space
-    extract(buffer , "\\s+" , ";");
-    cout<<buffer;
-	
-	string command = "firefox";
-	char *arg[2];
-	arg[0] =(char*)command.c_str();
-	arg[1] = NULL;
-	
-	/*
-	string matched;
-	while(buffer.size() > 0){
-		matched = extract(buffer, "");
-		args.push_back(matched);
-		
-		}
-		
-	cout<<endl;
-	for (int i=0 ; i<args.size() ; i++)
-	{
-		cout<<args[i]<<endl;
-		
-		}
-	*/
-	
-   char *token;
-   token = strtok((char*)buffer.c_str(), ";");
-   
-   cout<<endl;
-   while( token != NULL ) {
-	   cout<<token<<endl;
-	   args.push_back(string(token));
-	   token = strtok(NULL, ";");
-	   
-   }
-	
-	cout<<endl;
-	
-	for (unsigned int i=0 ; i<args.size() ; i++)
-	{
-		cout<<args[i]<<endl;
-		
-		}
-	
-		
-	int i = 5;
-	while(0){
-		
-		
-		
-    if (fork()== 0) {
+	if (fork()== 0) {
 		//get into child process >> execute here
-		printf("HC: hello from child\n");
+		//printf("HC: hello from child\n");	
+		// call is generic for both commands with/without args
 		execvp(arg[0] ,arg); 
 	} else
 	{ 
-		printf("HP: hello from parent\n"); 
+		//printf("HP: hello from parent\n"); 
 		//wait my child
 		wait(NULL); 
 		printf("CT: child has terminated\n"); 
 	} 
 
+}	
+
+void Creamy_Shell::run_shell(){
+	
+	
+	string buffer;
+	while(1){
 		
-	i--;	
+	cout<<"$ ";	
+	getline(cin,buffer);
+	trim(buffer);
+	if(buffer.size()){
+		command = buffer;
+		split_parameters();
+		call_fork();
+	
+		}
+	
+		
 		
 		}
 	
-	printf("Bye\n"); 
+	
+	}
+	
+void Creamy_Shell::trim_command(){
+	ltrim(command);
+    rtrim(command);
+    extract(command , "\\s+" , " ");
+	}
+		
+void Creamy_Shell::split_parameters(){
+   
+   args.empty();
+   trim_command();
+   char *token;
+   
+   //splitting by space
+   token = strtok((char*)command.c_str(), " ");
+   while( token != NULL ) {
+	   
+	   args.push_back(string(token));
+	   token = strtok(NULL, " ");
+	   
+   }
+	
+	}
+
+void Creamy_Shell::get_arg_list(char* arr[]){
+	
+	unsigned int j=0;
+	for(j =0 ; j<args.size() ; j++){
+		//char* strcpy(char* dest, const char* src);
+		arr[j] =(char*)args[j].c_str();
+				
+		}
+	arr[j] = NULL;
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+int main(){
+	
+	Creamy_Shell shell;
+	
+	shell.run_shell();
+	
 	return 0; 
 }
 
@@ -154,7 +166,6 @@ string extract(string &exp , string re , string delim){
 		get_matched(exp, reg , matched);
 		trim(matched);
 		exp = regex_replace(exp,reg, delim);
-		//cout<<"<"<<exp<<"<"<<endl;
 		return matched;
 		 }
 
@@ -162,7 +173,7 @@ string extract(string &exp , string re , string delim){
 
 
 void ltrim(string &exp){
-		 regex reg("^\\s*");
+		regex reg("^\\s*");
 		string mat;
 		get_matched(exp , reg,mat);
 		exp = regex_replace(exp,reg,"");
