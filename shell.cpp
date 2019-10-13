@@ -18,6 +18,8 @@ using namespace std;
 
 
 void trim(string &str);
+void ltrim(string &exp);
+void rtrim(string &exp);
 string extract(string &exp , string re , string delim="");
 int get_matched(string s , regex reg , string &mat);
 
@@ -25,7 +27,7 @@ class Creamy_Shell{
 	
 	public:
 	string command;
-	vector<char> args;
+	vector<string> args;
 	void run_shell();
 	void split_parameters();
 	
@@ -48,15 +50,54 @@ int main(){
 	
 	//cout<<buffer;
  
-    trim(buffer);
+    ltrim(buffer);
+    rtrim(buffer);
+    
+    //arguments are separated by just one space
+    extract(buffer , "\\s+" , ";");
     cout<<buffer;
-
+	
 	string command = "firefox";
 	char *arg[2];
 	arg[0] =(char*)command.c_str();
 	arg[1] = NULL;
 	
+	/*
+	string matched;
+	while(buffer.size() > 0){
+		matched = extract(buffer, "");
+		args.push_back(matched);
+		
+		}
+		
+	cout<<endl;
+	for (int i=0 ; i<args.size() ; i++)
+	{
+		cout<<args[i]<<endl;
+		
+		}
+	*/
 	
+   char *token;
+   token = strtok((char*)buffer.c_str(), ";");
+   
+   cout<<endl;
+   while( token != NULL ) {
+	   cout<<token<<endl;
+	   args.push_back(string(token));
+	   token = strtok(NULL, ";");
+	   
+   }
+	
+	cout<<endl;
+	
+	for (unsigned int i=0 ; i<args.size() ; i++)
+	{
+		cout<<args[i]<<endl;
+		
+		}
+	
+		
 	int i = 5;
 	while(0){
 		
@@ -118,3 +159,20 @@ string extract(string &exp , string re , string delim){
 		 }
 
 
+
+
+void ltrim(string &exp){
+		 regex reg("^\\s*");
+		string mat;
+		get_matched(exp , reg,mat);
+		exp = regex_replace(exp,reg,"");
+	 }
+
+ 
+ void rtrim(string &exp){
+	regex reg("(\\s*)$");
+	string mat;
+	get_matched(exp ,reg,mat);
+	exp = regex_replace(exp,reg,"");
+		 
+		 }
