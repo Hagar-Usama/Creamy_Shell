@@ -32,14 +32,13 @@ int main(){
 	
 	/* int execvp(const char *file, char *const argv[]); */
 	char *arg[2];
-	arg[0] = "ls";
+	arg[0] = "hello";
 	arg[1] = NULL;
 	
 	execvp(arg[0] ,arg);
-	wait();
+	//wait();
 	execvp(arg[0] ,arg);
 	printf("*.*.*.*.*.*");
-	system("ls");
 	
 
 
