@@ -2,7 +2,7 @@
 //////////////// Hagar Usama            ///////////////////////////////
 ////////////////  4970                  /////////////////////////////// 
 ////////////////  LAB 1 : Simple Shell  ///////////////////////////////
-////////////////  Date : 13/10          ///////////////////////////////
+////////////////  Date : 15/10          ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
 #include <iostream>
@@ -16,22 +16,22 @@
 
 
 #define RESET   "\033[0m"
-#define BLACK   "\033[30m"      /* Black */
-#define RED     "\033[31m"      /* Red */
-#define GREEN   "\033[32m"      /* Green */
-#define YELLOW  "\033[33m"      /* Yellow */
-#define BLUE    "\033[34m"      /* Blue */
-#define MAGENTA "\033[35m"      /* Magenta */
-#define CYAN    "\033[36m"      /* Cyan */
-#define WHITE   "\033[37m"      /* White */
-#define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
-#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
-#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
-#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
-#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
-#define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
-#define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
-#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
+#define BLACK   "\033[30m"      
+#define RED     "\033[31m"      
+#define GREEN   "\033[32m"      
+#define YELLOW  "\033[33m"      
+#define BLUE    "\033[34m"      
+#define MAGENTA "\033[35m"      
+#define CYAN    "\033[36m"      
+#define WHITE   "\033[37m"      
+#define BOLDBLACK   "\033[1m\033[30m"
+#define BOLDRED     "\033[1m\033[31m"
+#define BOLDGREEN   "\033[1m\033[32m"
+#define BOLDYELLOW  "\033[1m\033[33m"
+#define BOLDBLUE    "\033[1m\033[34m"
+#define BOLDMAGENTA "\033[1m\033[35m"
+#define BOLDCYAN    "\033[1m\033[36m"
+#define BOLDWHITE   "\033[1m\033[37m"
 
 
 #define LIMIT 50
@@ -44,9 +44,9 @@ void trim(string &str);
 void ltrim(string &exp);
 // right trim
 void rtrim(string &exp);
-// extract a certain expersion & replaces it by a delimiter
+// extract a certain experssion & replaces it by a delimiter
 string extract(string &exp , string re , string delim="");
-//get matched expersion from a string using regex
+//get matched experssion from a string using regex
 int get_matched(string s , regex reg , string &mat);
 
 //write in log file (append)
@@ -56,10 +56,10 @@ void write_dic(string filename , string str);
 
 
 //signal handler for terminated processes
-void handler(int signal){
-	
+void sweety_handler(int signal){
 	pid_t pid;
     pid = wait(NULL);
+    
     
 	//cout<<"Child process was terminated"<<endl;
 	if(pid == -1)write_log("log.txt", "Child process was terminated [foreground]\n");
@@ -71,14 +71,13 @@ void handler(int signal){
 class Creamy_Shell{
 	
 	public:
-	string command;
-	vector<string> args;
-	int status;
-	
 	Creamy_Shell();
 	void run_shell();
+	void greet();
 	
 	private:
+	string command;
+	vector<string> args;
 	//splits parameters of command string
 	void split_parameters();
 	//trims spaces from command string
@@ -97,7 +96,11 @@ Creamy_Shell::Creamy_Shell(){
 		write_dic("log.txt" ,"");
 		//command = "Hello";
 	};
-
+void Creamy_Shell::greet(){
+	cout<<BOLDYELLOW<<"*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*"<<RESET<<endl;		  
+	cout<<BOLDYELLOW<<"*.*.* Welcome to Creamy Shell ... Enjoy!! *.*.*"<<RESET<<endl;
+	cout<<BOLDYELLOW<<"*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*"<<RESET<<endl;
+	}
 void Creamy_Shell::call_cd(){
 	
 if(args[1][0] == '/'){
@@ -112,8 +115,9 @@ if(args[1][0] == '/'){
 void Creamy_Shell::call_fork(bool state){
 	
   
-    pid_t   pid;
-    int     status;
+    pid_t pid;
+    int   status;
+	int   execvp_stat;
 	
 	char *arg[args.size()+1];
 	get_arg_list(arg);
@@ -124,11 +128,19 @@ void Creamy_Shell::call_fork(bool state){
 	if (pid == 0) {
 	
 		
-		execvp(arg[0] ,arg); 
+		//cout<<RED<<"Command not found\n";
+		execvp_stat = execvp(arg[0] ,arg);
+		
+		if(execvp_stat == -1) {
+			
+			perror("Command not found  ");
+			exit(0);
+			 }
+	
+	
 	
 	//if there is an error >> print it	
 	} else if( pid < 0){
-		
 		perror("Child creation failed\n");
 		
 	}
@@ -137,7 +149,12 @@ void Creamy_Shell::call_fork(bool state){
 	{ 
 		 
 		//wait my child!! 
+		//if(execvp_stat>-1 && state) wait(&status);
+		//else if(state) waitpid(pid, &status, WNOHANG);
+		
 		if(state) wait(&status);
+		
+		if(args[0].compare("exit") == 0) exit(1);
 		//if(state) for(int i=0 ; i< LIMIT ; i++)	wait(NULL);
 			
 	} 
@@ -156,17 +173,11 @@ void Creamy_Shell::run_shell(){
 	
 	split_parameters();
 	
-	/*
-	for( unsigned int i =0 ; i< args.size() ; i++){
-		
-		cout<<"** "<< args[i]<<"**" <<endl;
-		}
-	*/
-	
 	
 	if(!args[0].compare("exit"))
+		{exit(0);
 		exit(0);
-		
+	}
 	else if(!args[0].compare("cd")){
 		call_cd();
 		
@@ -223,10 +234,12 @@ void Creamy_Shell::get_arg_list(char* arr[]){
 int main(){
 		
 	Creamy_Shell shell;
-	signal(SIGCHLD , handler);
+	signal(SIGCHLD , sweety_handler);
 	
-	//shell.run_shell();	
+	//shell.run_shell();
+	shell.greet();	
 	while(1){
+			
 		shell.run_shell();	
 		}
 	
