@@ -75,7 +75,7 @@ make greet
     - 🍴 Fork this repo!
 
 - **Option 2**
-    - Clone this repo to your local machine using [Repo Link]( "Creamy Shell")
+    - Clone this repo to your local machine using [Repo Link](https://github.com/Hagar-Usama/Unix_Shell/ "Creamy Shell")
 
 - **option 3**
   - Even if you do not code, send me your idea. I will credit you. And if you are interested, I will help you make it **on your own!**
