@@ -56,6 +56,14 @@ make clean
 ``` bash
 make greet
 ```
+
+[![Greet](https://github.com/Hagar-Usama/Unix_Shell/blob/master/img/creamy_shell_1.gif
+)]()
+
+[![Shell Run](https://github.com/Hagar-Usama/Unix_Shell/blob/master/img/creamy_shell_2.gif
+)]()
+
+
 ---
 ## Contributing
 > To get started...
