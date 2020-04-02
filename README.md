@@ -1,7 +1,8 @@
 # Creamy Shell 🍦
 Basic Unix Shell
 
-[![build-passing](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
+
+[![Build-Passing](https://img.shields.io/:Build-Passing-whiteGreen.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
 [![Totally-Creamy](https://img.shields.io/:Totally-Creamy-yellow.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
 [![Linux-Lover](https://img.shields.io/:Linux-Lover-red.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
 [![Processess-Everywhere](https://img.shields.io/:Processess-Everywhere-brown.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
