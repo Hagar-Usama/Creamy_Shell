@@ -97,6 +97,10 @@ make greet
 ---
 ## Bugs
 * Bug 0001: thread timeout
+
+[![Bug 0001 Detect](https://github.com/Hagar-Usama/Unix_Shell/blob/master/img/Creamy_Bug_0001.gif
+)]()
+
 ---
 ## License
 ![License](http://img.shields.io/:License-GPL3-blue.svg?style=round-square)
