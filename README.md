@@ -4,7 +4,7 @@ Basic Unix Shell
 [![build-passing](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
 [![Totally-Creamy](https://img.shields.io/:Totally-Creamy-yellow.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
 [![Linux-Lover](https://img.shields.io/:Linux-Lover-red.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
-[![Threads-Everywhere](https://img.shields.io/:Threads-Everywhere-brown.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
+[![Processess-Everywhere](https://img.shields.io/:Processess-Everywhere-brown.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
 
 
 ---
@@ -91,6 +91,7 @@ make greet
 ---
 ## To-do List
 * [x] Build Neat README
+* [x] Add 🍦 to Welcome Screen
 * [ ] Fix Bug 0001
 
 ---
@@ -98,7 +99,7 @@ make greet
 * Bug 0001: thread timeout
 ---
 ## License
-![License](http://img.shields.io/:license-gpl3-blue.svg?style=round-square)
+![License](http://img.shields.io/:License-GPL3-blue.svg?style=round-square)
 
 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html "GPL3")
 

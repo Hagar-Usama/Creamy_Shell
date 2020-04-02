@@ -98,7 +98,7 @@ Creamy_Shell::Creamy_Shell(){
 	};
 void Creamy_Shell::greet(){
 	cout<<BOLDYELLOW<<"*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*"<<RESET<<endl;		  
-	cout<<BOLDYELLOW<<"*.*.* Welcome to Creamy Shell ... Enjoy!! *.*.*"<<RESET<<endl;
+	cout<<BOLDYELLOW<<"*.*.* Welcome to Creamy Shell 🍦... Enjoy!! *.*.*"<<RESET<<endl;
 	cout<<BOLDYELLOW<<"*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*"<<RESET<<endl;
 	}
 void Creamy_Shell::call_cd(){
