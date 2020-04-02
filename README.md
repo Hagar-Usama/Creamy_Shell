@@ -1,14 +1,24 @@
 # Creamy Shell 🍦
 Basic Unix Shell
 
+[![build-passing](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
+[![Totally-Creamy](https://img.shields.io/:Totally-Creamy-yellow.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
+[![Linux-Lover](https://img.shields.io/:Linux-Lover-red.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
+[![Threads-Everywhere](https://img.shields.io/:Threads-Everywhere-brown.svg?style=round-square)](https://api.travis-ci.org/badges/badgerbadgerbadger.svg?)
+
+
 ---
 ## Table of Contents
 * Introduction
 * Technologies
 * Launch
----
+* Contributing
+* To-do List
+* Bugs
+* License
 
-## add badges HERE>>
+
+---
 
 ## Introduction
 Linux has it own lovely terminal! Why not to make our own?
@@ -48,6 +58,28 @@ make greet
 ```
 ---
 ## Contributing
+> To get started...
+
+### Step 1
+
+- **Option 1**
+    - 🍴 Fork this repo!
+
+- **Option 2**
+    - Clone this repo to your local machine using [Repo Link]( "Creamy Shell")
+
+- **option 3**
+  - Even if you do not code, send me your idea. I will credit you. And if you are interested, I will help you to make it **on your own!**
+
+### Step 2
+
+- **HACK AWAY!** 🔨🔨🔨
+
+### Step 3
+
+- 🔃 Create a new pull request using this [Link]().
+
+<!--  <a   ></a> -->
 ---
 ## To-do List
 * [x] Build Neat README
@@ -58,6 +90,7 @@ make greet
 * Bug 0001: thread timeout
 ---
 ## License
+![License](http://img.shields.io/:license-gpl3-blue.svg?style=round-square)
 
 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html "GPL3")
 
