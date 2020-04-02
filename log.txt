@@ -1,5 +1,5 @@
 Child process was terminated [foreground]
 Child process was terminated [foreground]
 Child process was terminated [foreground]
-Child process was terminated [foreground]
-Child process was terminated [foreground]
+Child process was terminated [Background]
+Child process was terminated [Background]
