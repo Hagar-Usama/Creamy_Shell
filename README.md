@@ -10,13 +10,13 @@ Basic Unix Shell
 
 ---
 ## Table of Contents
-* Introduction
-* Technologies
-* Launch
-* Contributing
-* To-do List
-* Bugs
-* License
+* [Introduction](https://github.com/Hagar-Usama/Unix_Shell#introduction "Introduction")
+* [Technologies](https://github.com/Hagar-Usama/Unix_Shell#technologies "Technologies")
+* [Launch](https://github.com/Hagar-Usama/Unix_Shell#launch "Launch")
+* [Contributing](https://github.com/Hagar-Usama/Unix_Shell#contributing "Contributing")
+* [To-do List](https://github.com/Hagar-Usama/Unix_Shell#to-do-list "To-do List")
+* [Bugs](https://github.com/Hagar-Usama/Unix_Shell#bugs "Bugs")
+* [License](https://github.com/Hagar-Usama/Unix_Shell#license "License")
 
 
 ---
@@ -31,9 +31,9 @@ We are trying to implement a Unix shell program. Making use of **execvp**, **for
 ---
 ## Technologies
 
-Two libraries are mainly used (in C++):
-* *Regex*: text manipulation (you may just use **strtok**)
-* *Unistd*: for execvp calls
+Three libraries are mainly used (in C++):
+* *regex*: text manipulation (you may just use **strtok**)
+* *unistd*: for execvp calls
 * *signals*: for signal handling
 ---
 ## Launch
